@@ -1,0 +1,19 @@
+{
+  "name": "generative-utils",
+  "version": "1.0.0",
+  "description": "A collection of helpful generative art utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgedoescode/generative-utils.git"
+  },
+  "author": "George Francis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgedoescode/generative-utils/issues"
+  },
+  "homepage": "https://github.com/georgedoescode/generative-utils#readme"
+}
