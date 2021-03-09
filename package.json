@@ -1,11 +1,8 @@
 {
-  "name": "generative-utils",
+  "name": "@georgedoescode/generative-utils",
   "version": "1.0.0",
   "description": "A collection of helpful generative art utilities",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/georgedoescode/generative-utils.git"
