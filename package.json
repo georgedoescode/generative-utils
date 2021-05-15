@@ -1,6 +1,6 @@
 {
   "name": "@georgedoescode/generative-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of handy generative art utilities",
   "main": "src/index.js",
   "repository": {
