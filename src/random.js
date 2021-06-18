@@ -16,15 +16,4 @@ function random() {
   }
 }
 
-function randomBias(min, max, bias, influence) {
-  const base = random(min, max);
-  const mix = random(0, 1) * influence;
-
-  return base * (1 - mix) + bias * mix;
-}
-
-function randomSnap(min, max, snapInc) {
-  return Math.round(random(min, max) / snapInc) * snapInc;
-}
-
-export { random, randomBias, randomSnap };
+export { random };
