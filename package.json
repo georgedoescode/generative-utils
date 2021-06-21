@@ -2,15 +2,24 @@
   "name": "@georgedoescode/generative-utils",
   "version": "1.0.4",
   "description": "A collection of handy generative art utilities",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/georgedoescode/generative-utils.git"
+  },
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/index.js"
   },
   "author": "George Francis",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/georgedoescode/generative-utils/issues"
   },
-  "homepage": "https://github.com/georgedoescode/generative-utils#readme"
+  "homepage": "https://github.com/georgedoescode/generative-utils#readme",
+  "dependencies": {
+    "@timohausmann/quadtree-js": "^1.2.4"
+  },
+  "devDependencies": {
+    "esbuild": "^0.12.9"
+  }
 }
