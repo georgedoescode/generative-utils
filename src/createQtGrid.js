@@ -6,7 +6,7 @@ const defaultQtOpts = {
   points: [],
   gap: 0,
   maxQtObjects: 10,
-  maxQtLevels: 6,
+  maxQtLevels: 4,
 };
 
 function getGridArea(bounds, colSize, rowSize) {
