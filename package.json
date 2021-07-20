@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/georgedoescode/generative-utils#readme",
   "dependencies": {
-    "@timohausmann/quadtree-js": "^1.2.4"
+    "@timohausmann/quadtree-js": "^1.2.4",
+    "d3": "^7.0.0",
+    "d3-delaunay": "^6.0.2"
   },
   "devDependencies": {
     "esbuild": "^0.12.9"
