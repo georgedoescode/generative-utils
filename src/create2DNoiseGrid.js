@@ -21,12 +21,12 @@ function create2DNoiseGrid(opts) {
 
   let xOff = 0;
 
-  for (let x = 0; x < opts.width; x += colSize) {
+  for (let x = 0; x < opts.width - colSize; x += colSize) {
     xOff += opts.xInc;
 
     let yOff = 0;
 
-    for (let y = 0; y < opts.height; y += rowSize) {
+    for (let y = 0; y < opts.height - rowSize; y += rowSize) {
       const noise = simplex.noise2D(xOff, yOff);
 
       cells.push({
