@@ -10,7 +10,7 @@ import { SVG } from "https://cdn.skypack.dev/@svgdotjs/svg.js";
 console.clear();
 
 const width = 200;
-const height = 200;
+const height = 100;
 
 const svg = SVG().viewbox(0, 0, width, height).addTo("body");
 
@@ -35,9 +35,9 @@ console.log(voronoi);
 
 const noiseGrid = create2DNoiseGrid({
   width: 200,
-  height: 200,
-  cols: 48,
-  rows: 48,
+  height: 100,
+  cols: 19,
+  rows: 19,
   yInc: 0.0375,
   xInc: 0.0375,
 });
@@ -45,3 +45,5 @@ const noiseGrid = create2DNoiseGrid({
 noiseGrid.forEach((cell) => {
   svg.rect(cell.width, cell.height).x(cell.x).y(cell.y).scale(0.9);
 });
+
+console.log(noiseGrid);
