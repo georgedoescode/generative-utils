@@ -1,4 +1,9 @@
-import { random, createQtGrid, createVoronoiDiagram } from "../dist/index.js";
+import {
+  random,
+  createQtGrid,
+  createVoronoiDiagram,
+  create2DNoiseGrid,
+} from "../dist/index.js";
 
 console.log(random([1, 2, 3]));
 
@@ -18,3 +23,12 @@ const voronoi = createVoronoiDiagram({
 });
 
 console.log(voronoi);
+
+const noiseGrid = create2DNoiseGrid({
+  width: 100,
+  height: 100,
+  cols: 10,
+  rows: 10,
+});
+
+console.log(noiseGrid);
