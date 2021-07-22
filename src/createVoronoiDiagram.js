@@ -35,14 +35,34 @@ function createVoronoiDiagram(opts) {
     voronoi.update();
   }
 
+  const cells = [...voronoi.cellPolygons()].map((points, index) => {
+    return {
+      ...formatCell(points),
+      neighbors: [...voronoi.neighbors(index)].map((index) => {
+        return formatCell(voronoi.cellPolygon(index));
+      }),
+    };
+  });
+
   return {
-    cells: [...voronoi.cellPolygons()].map((points) => {
-      return {
-        points,
-        innerCircleRadius: getClosestEdgeToCentroid(points),
-        centroid: polygonCentroid(points),
-      };
+    cells: cells.map((cell, index) => {
+      const neighbors = [...voronoi.neighbors(index)];
+
+      cell.neighbors = neighbors.map((index) => cells[index]);
+
+      return cell;
     }),
+  };
+}
+
+function formatCell(points) {
+  return {
+    points,
+    innerCircleRadius: getClosestEdgeToCentroid(points),
+    centroid: {
+      x: polygonCentroid(points)[0],
+      y: polygonCentroid(points)[1],
+    },
   };
 }
 
