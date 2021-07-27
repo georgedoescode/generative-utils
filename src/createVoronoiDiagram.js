@@ -35,25 +35,25 @@ function createVoronoiDiagram(opts) {
     voronoi.update();
   }
 
-  const cells = [...voronoi.cellPolygons()].map((points, index) => {
-    return {
-      ...formatCell(points),
-      neighbors: [...voronoi.neighbors(index)].map((index) => {
-        return formatCell(voronoi.cellPolygon(index));
-      }),
-    };
-  });
+  const cells = [...voronoi.cellPolygons()]
+    .filter((c) => c !== null)
+    .map((points, index) => {
+      return {
+        ...formatCell(points),
+        neighbors: [...voronoi.neighbors(index)].map((index) => {
+          return formatCell(voronoi.cellPolygon(index));
+        }),
+      };
+    });
 
   return {
-    cells: cells
-      .map((cell, index) => {
-        const neighbors = [...voronoi.neighbors(index)];
+    cells: cells.map((cell, index) => {
+      const neighbors = [...voronoi.neighbors(index)];
 
-        cell.neighbors = neighbors.map((index) => cells[index]);
+      cell.neighbors = neighbors.map((index) => cells[index]);
 
-        return cell;
-      })
-      .filter((c) => !isNaN(c.innerCircleRadius)),
+      return cell;
+    }),
   };
 }
 
