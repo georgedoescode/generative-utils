@@ -35,15 +35,16 @@ function createVoronoiDiagram(opts) {
     voronoi.update();
   }
 
-  const cells = [...voronoi.cellPolygons()].map((points, index) => {
-    console.log({ points });
-    return {
-      ...formatCell(points),
-      neighbors: [...voronoi.neighbors(index)].map((index) => {
-        return formatCell(voronoi.cellPolygon(index));
-      }),
-    };
-  });
+  const cells = [...voronoi.cellPolygons()]
+    .map((points, index) => {
+      return {
+        ...formatCell(points),
+        neighbors: [...voronoi.neighbors(index)].map((index) => {
+          return formatCell(voronoi.cellPolygon(index));
+        }),
+      };
+    })
+    .filter((c) => !isNaN(c.innerCircleRadius));
 
   return {
     cells: cells.map((cell, index) => {
