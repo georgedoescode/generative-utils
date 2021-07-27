@@ -43,10 +43,10 @@ function createVoronoiDiagram(opts) {
           .map((index) => {
             return formatCell(voronoi.cellPolygon(index));
           })
-          .filter((c) => !isNaN(c.innerCircleRadius)),
+          .filter((c) => !!c && !isNaN(c.innerCircleRadius)),
       };
     })
-    .filter((c) => !isNaN(c.innerCircleRadius));
+    .filter((c) => !!c && !isNaN(c.innerCircleRadius));
 
   return {
     cells: cells.map((cell, index) => {
