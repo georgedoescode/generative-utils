@@ -38,10 +38,11 @@ function createVoronoiDiagram(opts) {
   const cells = [...voronoi.cellPolygons()]
     .map((points, index) => {
       return {
+        baseIndex: index,
         ...formatCell(points),
         neighbors: [...voronoi.neighbors(index)].map((index) => {
           return {
-            index,
+            baseIndex: index,
             ...formatCell(voronoi.cellPolygon(index)),
           };
         }),
