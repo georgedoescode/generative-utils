@@ -39,11 +39,9 @@ function createVoronoiDiagram(opts) {
     .map((points, index) => {
       return {
         ...formatCell(points),
-        neighbors: [...voronoi.neighbors(index)]
-          .map((index) => {
-            return formatCell(voronoi.cellPolygon(index));
-          })
-          .filter((c) => !!c && !isNaN(c.innerCircleRadius)),
+        neighbors: [...voronoi.neighbors(index)].map((index) => {
+          return formatCell(voronoi.cellPolygon(index));
+        }),
       };
     })
     .filter((c) => !!c && !isNaN(c.innerCircleRadius));
@@ -52,7 +50,9 @@ function createVoronoiDiagram(opts) {
     cells: cells.map((cell, index) => {
       const neighbors = [...voronoi.neighbors(index)];
 
-      cell.neighbors = neighbors.map((index) => cells[index]);
+      cell.neighbors = neighbors
+        .map((index) => cells[index])
+        .filter((c) => !!c && !isNaN(c.innerCircleRadius));
 
       return cell;
     }),
