@@ -45,13 +45,15 @@ function createVoronoiDiagram(opts) {
   });
 
   return {
-    cells: cells.map((cell, index) => {
-      const neighbors = [...voronoi.neighbors(index)];
+    cells: cells
+      .map((cell, index) => {
+        const neighbors = [...voronoi.neighbors(index)];
 
-      cell.neighbors = neighbors.map((index) => cells[index]);
+        cell.neighbors = neighbors.map((index) => cells[index]);
 
-      return cell;
-    }),
+        return cell;
+      })
+      .filter((c) => !isNaN(c.innerCircleRadius)),
   };
 }
 
