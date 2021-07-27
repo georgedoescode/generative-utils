@@ -40,7 +40,10 @@ function createVoronoiDiagram(opts) {
       return {
         ...formatCell(points),
         neighbors: [...voronoi.neighbors(index)].map((index) => {
-          return formatCell(voronoi.cellPolygon(index));
+          return {
+            index,
+            ...formatCell(voronoi.cellPolygon(index)),
+          };
         }),
       };
     })
