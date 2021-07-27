@@ -44,7 +44,7 @@ function createVoronoiDiagram(opts) {
         }),
       };
     })
-    .filter((c) => !isNaN(c.innerCircleRadius));
+    .filter((c, index) => voronoi.cellPolygon(index) !== null);
 
   return {
     cells: cells.map((cell, index) => {
