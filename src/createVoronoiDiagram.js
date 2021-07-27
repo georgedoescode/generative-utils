@@ -43,16 +43,10 @@ function createVoronoiDiagram(opts) {
           .map((index) => {
             return formatCell(voronoi.cellPolygon(index));
           })
-          .filter(
-            (c) => !!c && !isNaN(c.innerCircleRadius) && !!c.centroid,
-            !isNaN(c.centroid.x) && !isNaN(c.centroid.y)
-          ),
+          .filter((c) => !isNaN(c.innerCircleRadius)),
       };
     })
-    .filter(
-      (c) => !!c && !isNaN(c.innerCircleRadius) && !!c.centroid,
-      !isNaN(c.centroid.x) && !isNaN(c.centroid.y)
-    );
+    .filter((c) => !isNaN(c.innerCircleRadius));
 
   return {
     cells: cells.map((cell, index) => {
