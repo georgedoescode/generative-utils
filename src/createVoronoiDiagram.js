@@ -44,13 +44,13 @@ function createVoronoiDiagram(opts) {
             return formatCell(voronoi.cellPolygon(index));
           })
           .filter(
-            (c) => !isNaN(c.innerCircleRadius) && !!c.centroid,
+            (c) => !!c && !isNaN(c.innerCircleRadius) && !!c.centroid,
             !isNaN(c.centroid.x) && !isNaN(c.centroid.y)
           ),
       };
     })
     .filter(
-      (c) => !isNaN(c.innerCircleRadius) && !!c.centroid,
+      (c) => !!c && !isNaN(c.innerCircleRadius) && !!c.centroid,
       !isNaN(c.centroid.x) && !isNaN(c.centroid.y)
     );
 
