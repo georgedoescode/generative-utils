@@ -44,7 +44,12 @@ function createVoronoiDiagram(opts) {
         }),
       };
     })
-    .filter((c, index) => voronoi.cellPolygon(index) !== null);
+    .filter(
+      (c) =>
+        !isNaN(c.innerCircleRadius) &&
+        !isNaN(c.centroid.x) &&
+        !isNaN(c.centroid.y)
+    );
 
   return {
     cells: cells.map((cell, index) => {
