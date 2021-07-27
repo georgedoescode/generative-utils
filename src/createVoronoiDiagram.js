@@ -38,7 +38,6 @@ function createVoronoiDiagram(opts) {
   const cells = [...voronoi.cellPolygons()]
     .map((points, index) => {
       return {
-        baseIndex: index,
         ...formatCell(points),
         neighbors: [...voronoi.neighbors(index)].map((index) => {
           return {
@@ -54,7 +53,7 @@ function createVoronoiDiagram(opts) {
       const neighbors = [...voronoi.neighbors(index)];
 
       cell.neighbors = neighbors
-        .map((index) => cells.find((c) => c.baseIndex === index))
+        .map((index) => cells[index])
         .filter((c) => !!c && !isNaN(c.innerCircleRadius));
 
       return cell;
