@@ -55,7 +55,14 @@ function createVoronoiDiagram(opts) {
     cells: cells.map((cell, index) => {
       const neighbors = [...voronoi.neighbors(index)];
 
-      cell.neighbors = neighbors.map((index) => cells[index]);
+      cell.neighbors = neighbors
+        .map((index) => cells[index])
+        .filter(
+          (c) =>
+            !isNaN(c.innerCircleRadius) &&
+            !isNaN(c.centroid.x) &&
+            !isNaN(c.centroid.y)
+        );
 
       return cell;
     }),
