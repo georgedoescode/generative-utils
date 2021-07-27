@@ -35,26 +35,41 @@ function createVoronoiDiagram(opts) {
     voronoi.update();
   }
 
-  const cells = [...voronoi.cellPolygons()]
-    .map((points, index) => {
-      return {
-        ...formatCell(points),
-        neighbors: [...voronoi.neighbors(index)].map((index) => {
-          return {
-            ...formatCell(voronoi.cellPolygon(index)),
-          };
-        }),
-      };
-    })
-    .filter((c) => !!c && !isNaN(c.innerCircleRadius));
+  let cells = [];
+
+  for (let i = 0; i < delaunay.points.length; i += 2) {
+    const cell = voronoi.cellPolygon(i >> 1);
+
+    if (cell === null) continue;
+
+    cells.push({
+      ...formatCell(cell),
+      neighbors: [...voronoi.neighbors(i)].map((index) => {
+        return {
+          ...formatCell(voronoi.cellPolygon(index)),
+        };
+      }),
+    });
+  }
+
+  // const cells = [...voronoi.cellPolygons()]
+  //   .map((points, index) => {
+  //     return {
+  //       ...formatCell(points),
+  //       neighbors: [...voronoi.neighbors(index)].map((index) => {
+  //         return {
+  //           ...formatCell(voronoi.cellPolygon(index)),
+  //         };
+  //       }),
+  //     };
+  //   })
+  //   .filter((c) => !!c && !isNaN(c.innerCircleRadius));
 
   return {
     cells: cells.map((cell, index) => {
       const neighbors = [...voronoi.neighbors(index)];
 
-      cell.neighbors = neighbors
-        .map((index) => cells[index])
-        .filter((c) => !!c && !isNaN(c.innerCircleRadius));
+      cell.neighbors = neighbors.map((index) => cells[index]);
 
       return cell;
     }),

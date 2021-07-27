@@ -7,12 +7,13 @@ const svg = SVG().viewbox(0, 0, 200, 200).addTo("body");
 const { cells } = createVoronoiDiagram({
   width: 200,
   height: 200,
-  points: [...Array(2000)].map(() => {
+  points: [...Array(4000)].map(() => {
     return {
-      x: random(0, 100),
-      y: random(0, 100),
+      x: random(0, 200),
+      y: random(0, 200),
     };
   }),
+  relaxIterations: 32,
 });
 
 const choice = random(cells);
