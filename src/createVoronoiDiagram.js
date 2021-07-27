@@ -42,7 +42,6 @@ function createVoronoiDiagram(opts) {
         ...formatCell(points),
         neighbors: [...voronoi.neighbors(index)].map((index) => {
           return {
-            baseIndex: index,
             ...formatCell(voronoi.cellPolygon(index)),
           };
         }),
@@ -55,7 +54,7 @@ function createVoronoiDiagram(opts) {
       const neighbors = [...voronoi.neighbors(index)];
 
       cell.neighbors = neighbors
-        .map((index) => cells[index])
+        .map((index) => cells.find((c) => c.baseIndex === index))
         .filter((c) => !!c && !isNaN(c.innerCircleRadius));
 
       return cell;
@@ -87,6 +86,7 @@ function getClosestEdgeToCentroid(points) {
         pointsSorted[i],
         pointsSorted[i + 1]
       );
+
       if (dist < closest) {
         closest = dist;
       }
