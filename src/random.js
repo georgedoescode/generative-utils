@@ -1,3 +1,5 @@
+import { prng } from "./prng";
+
 function random() {
   const isArray = Array.isArray(arguments[0]);
 
@@ -10,7 +12,7 @@ function random() {
     const max = arguments[1];
     const clamp = arguments[2] || false;
 
-    const val = Math.random() * (max - min) + min;
+    const val = prng() * (max - min) + min;
 
     return clamp ? Math.round(val) : val;
   }

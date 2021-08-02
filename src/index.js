@@ -8,3 +8,4 @@ export { createCoordsTransformer } from "./createCoordsTransformer.js";
 export { createQtGrid } from "./createQtGrid.js";
 export { distToSegment } from "./distToSegment.js";
 export { createVoronoiDiagram } from "./createVoronoiDiagram.js";
+export { seedPRNG } from "./prng.js";

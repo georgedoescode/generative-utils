@@ -20,6 +20,9 @@
     "@timohausmann/quadtree-js": "^1.2.4",
     "d3": "^7.0.0",
     "d3-delaunay": "^6.0.2",
+    "random": "^3.0.6",
+    "random-seed": "^0.3.0",
+    "seedrandom": "^3.0.5",
     "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
