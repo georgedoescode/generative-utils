@@ -9,3 +9,4 @@ export { createQtGrid } from "./createQtGrid.js";
 export { distToSegment } from "./distToSegment.js";
 export { createVoronoiDiagram } from "./createVoronoiDiagram.js";
 export { seedPRNG } from "./prng.js";
+export { createNoiseGrid } from "./createNoiseGrid.js";
