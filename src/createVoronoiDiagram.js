@@ -17,6 +17,18 @@ function createVoronoiDiagram(opts) {
   const delaunay = Delaunay.from(opts.points);
   const voronoi = delaunay.voronoi([0, 0, opts.width, opts.height]);
 
+  const diagramPoints = [];
+
+  for (let i = 0; i < delaunay.points.length; i += 2) {
+    const x = delaunay.points[i];
+    const y = delaunay.points[i + 1];
+
+    diagramPoints.push({
+      x,
+      y,
+    });
+  }
+
   for (let k = 0; k < opts.relaxIterations; k++) {
     for (let i = 0; i < delaunay.points.length; i += 2) {
       const cell = voronoi.cellPolygon(i >> 1);
@@ -52,19 +64,6 @@ function createVoronoiDiagram(opts) {
     });
   }
 
-  // const cells = [...voronoi.cellPolygons()]
-  //   .map((points, index) => {
-  //     return {
-  //       ...formatCell(points),
-  //       neighbors: [...voronoi.neighbors(index)].map((index) => {
-  //         return {
-  //           ...formatCell(voronoi.cellPolygon(index)),
-  //         };
-  //       }),
-  //     };
-  //   })
-  //   .filter((c) => !!c && !isNaN(c.innerCircleRadius));
-
   return {
     cells: cells.map((cell, index) => {
       const neighbors = [...voronoi.neighbors(index)];
@@ -73,6 +72,7 @@ function createVoronoiDiagram(opts) {
 
       return cell;
     }),
+    points: diagramPoints,
   };
 }
 

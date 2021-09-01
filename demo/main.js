@@ -1,4 +1,8 @@
-import { createNoiseGrid } from "../dist/index.js";
+import {
+  createNoiseGrid,
+  createVoronoiTessellation,
+  random,
+} from "../dist/index.js";
 
 const grid = createNoiseGrid({
   width: 200,
@@ -10,3 +14,12 @@ const grid = createNoiseGrid({
 });
 
 console.log(grid);
+
+const t = createVoronoiTessellation({
+  width: 100,
+  height: 100,
+  relaxIterations: 4,
+  points: [...Array(40)].map(() => ({ x: random(0, 100), y: random(0, 100) })),
+});
+
+console.log(t);
