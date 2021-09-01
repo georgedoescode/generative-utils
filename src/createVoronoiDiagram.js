@@ -19,16 +19,6 @@ function createVoronoiDiagram(opts) {
 
   const diagramPoints = [];
 
-  for (let i = 0; i < delaunay.points.length; i += 2) {
-    const x = delaunay.points[i];
-    const y = delaunay.points[i + 1];
-
-    diagramPoints.push({
-      x,
-      y,
-    });
-  }
-
   for (let k = 0; k < opts.relaxIterations; k++) {
     for (let i = 0; i < delaunay.points.length; i += 2) {
       const cell = voronoi.cellPolygon(i >> 1);
@@ -45,6 +35,16 @@ function createVoronoiDiagram(opts) {
     }
 
     voronoi.update();
+  }
+
+  for (let i = 0; i < delaunay.points.length; i += 2) {
+    const x = delaunay.points[i];
+    const y = delaunay.points[i + 1];
+
+    diagramPoints.push({
+      x,
+      y,
+    });
   }
 
   let cells = [];

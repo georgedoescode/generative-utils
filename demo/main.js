@@ -15,11 +15,18 @@ const grid = createNoiseGrid({
 
 console.log(grid);
 
+const points = [...Array(40)].map(() => ({
+  x: random(0, 100),
+  y: random(0, 100),
+}));
+
+console.log(points);
+
 const t = createVoronoiTessellation({
   width: 100,
   height: 100,
-  relaxIterations: 4,
-  points: [...Array(40)].map(() => ({ x: random(0, 100), y: random(0, 100) })),
+  relaxIterations: 0,
+  points,
 });
 
 console.log(t);
