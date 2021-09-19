@@ -61,7 +61,13 @@ function createNoiseGrid(opts) {
 
   return {
     cells,
-    lookup: lookup(cells, opts.width, opts.height, numCols, colSize),
+    lookup: lookup(
+      cells,
+      opts.width,
+      opts.height,
+      numCols,
+      Math.max(colSize, rowSize)
+    ),
   };
 }
 
