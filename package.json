@@ -2,13 +2,15 @@
   "name": "@georgedoescode/generative-utils",
   "version": "1.0.37",
   "description": "A collection of handy generative art utilities",
-  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/georgedoescode/generative-utils.git"
   },
   "scripts": {
-    "build": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/index.js"
+    "build-module": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/esm/index.js",
+    "build-cjs": "esbuild src/index.js --bundle --minify --format=cjs --outfile=dist/cjs/index.js"
   },
   "author": "George Francis",
   "license": "MIT",
