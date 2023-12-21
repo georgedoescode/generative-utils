@@ -1,69 +1,57 @@
-function formatPoints(points, close) {
-  points = [...points];
-
-  if (!Array.isArray(points[0])) {
-    points = points.map(({ x, y }) => [x, y]);
-  }
-
-  if (close) {
-    const lastPoint = points[points.length - 1];
-    const secondToLastPoint = points[points.length - 2];
-
-    const firstPoint = points[0];
-    const secondPoint = points[1];
-
-    points.unshift(lastPoint);
-    points.unshift(secondToLastPoint);
-
-    points.push(firstPoint);
-    points.push(secondPoint);
-  }
-
-  return points.flat();
-}
-
 function spline(points = [], tension = 1, close = false, cb) {
-  points = formatPoints(points, close);
+  if (points.length < 2) return ''
 
-  const size = points.length;
-  const last = size - 4;
+    // Helper function to calculate a Catmull-Rom spline point
+    function catmullRom(p0, p1, p2, p3, t) {
+        const t2 = t * t
+        const t3 = t2 * t
 
-  const startPointX = close ? points[2] : points[0];
-  const startPointY = close ? points[3] : points[1];
+        return {
+            x:
+                0.5 *
+                (2 * p1.x +
+                    (-p0.x + p2.x) * t +
+                    (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 +
+                    (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3),
+            y:
+                0.5 *
+                (2 * p1.y +
+                    (-p0.y + p2.y) * t +
+                    (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 +
+                    (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3),
+        }
+    }
 
-  let path = "M" + [startPointX, startPointY];
+    let path = 'M' + [points[0].x, points[0].y]
+    cb && cb('MOVE', [points[0].x, points[0].y])
 
-  cb && cb("MOVE", [startPointX, startPointY]);
+    const numPoints = points.length
+    const segmentCount = 20 // Number of segments between control points
+    const loopLimit = close ? numPoints : numPoints - 1
 
-  const startIteration = close ? 2 : 0;
-  const maxIteration = close ? size - 4 : size - 2;
-  const inc = 2;
+    for (let i = 0; i < loopLimit; i++) {
+        const p0 = points[i === 0 ? (close ? numPoints - 1 : i) : i - 1]
+        const p1 = points[i]
+        const p2 = points[(i + 1) % numPoints]
+        const p3 =
+            points[
+                i + 2 < numPoints ? i + 2 : close ? (i + 2) % numPoints : i + 1
+            ]
 
-  for (let i = startIteration; i < maxIteration; i += inc) {
-    const x0 = i ? points[i - 2] : points[0];
-    const y0 = i ? points[i - 1] : points[1];
+        for (let j = 1; j <= segmentCount; j++) {
+            const t = j / segmentCount
+            const pt = catmullRom(p0, p1, p2, p3, t)
 
-    const x1 = points[i + 0];
-    const y1 = points[i + 1];
+            path += 'L' + [pt.x, pt.y]
+            cb && cb('LINE', [pt.x, pt.y])
+        }
+    }
 
-    const x2 = points[i + 2];
-    const y2 = points[i + 3];
+    if (close) {
+        path += 'Z'
+    }
 
-    const x3 = i !== last ? points[i + 4] : x2;
-    const y3 = i !== last ? points[i + 5] : y2;
-
-    const cp1x = x1 + ((x2 - x0) / 6) * tension;
-    const cp1y = y1 + ((y2 - y0) / 6) * tension;
-
-    const cp2x = x2 - ((x3 - x1) / 6) * tension;
-    const cp2y = y2 - ((y3 - y1) / 6) * tension;
-
-    path += "C" + [cp1x, cp1y, cp2x, cp2y, x2, y2];
-
-    cb && cb("CURVE", [cp1x, cp1y, cp2x, cp2y, x2, y2]);
-  }
-
-  return path;
+    return path
 }
 
 export { spline };
