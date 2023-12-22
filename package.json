@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build-module": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/esm/index.js",
-    "build-cjs": "esbuild src/index.js --bundle --minify --format=cjs --outfile=dist/cjs/index.js"
+    "build-cjs": "esbuild src/index.js --bundle --minify --format=cjs --outfile=dist/cjs/index.js",
+    "build": "npm run build-module && npm run build-cjs"
   },
   "author": "George Francis",
   "license": "MIT",
