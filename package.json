@@ -1,33 +1,34 @@
 {
-  "name": "@georgedoescode/generative-utils",
-  "version": "1.0.38",
-  "description": "A collection of handy generative art utilities",
-  "module": "dist/esm/index.js",
-  "main": "dist/cjs/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/georgedoescode/generative-utils.git"
+  "name": "generative-utils",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/generative-utils.umd.cjs",
+  "module": "./dist/generative-utils.js",
+  "exports": {
+    ".": {
+      "import": "./dist/generative-utils.js",
+      "require": "./dist/generative-utils.umd.cjs"
+    }
   },
   "scripts": {
-    "build-module": "esbuild src/index.js --bundle --minify --format=esm --outfile=dist/esm/index.js",
-    "build-cjs": "esbuild src/index.js --bundle --minify --format=cjs --outfile=dist/cjs/index.js"
-  },
-  "author": "George Francis",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/georgedoescode/generative-utils/issues"
-  },
-  "homepage": "https://github.com/georgedoescode/generative-utils#readme",
-  "dependencies": {
-    "@timohausmann/quadtree-js": "^1.2.4",
-    "d3": "^7.0.0",
-    "d3-delaunay": "^6.0.2",
-    "random": "^3.0.6",
-    "random-seed": "^0.3.0",
-    "seedrandom": "^3.0.5",
-    "simplex-noise": "^2.4.0"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "esbuild": "^0.12.9"
+    "@vitest/coverage-v8": "^1.6.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.2.0"
   }
 }
